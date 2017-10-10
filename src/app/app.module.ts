@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NglModule } from 'ng-lightning/ng-lightning';
 
 import { routes } from './app.route';
 
@@ -16,10 +17,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot(routes),
+    NglModule.forRoot(),
     CoreModule,
     DomainModule,
-    PagesModule,
-    RouterModule.forRoot(routes)
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
