@@ -1,0 +1,19 @@
+<table ngl-datatable [data]="clients" class="slds-max-medium-table--stacked-horizontal" (onRowClick)="toggleRowSelection($event)">
+  <ngl-datatable-column>
+    <ng-template nglDatatableHeading>
+      <ngl-form-checkbox>
+        <input nglFormControl type="checkbox" #selectAll (click)="toggleSelectAll(selectAll.checked)"/>
+      </ngl-form-checkbox>
+    </ng-template>
+    <ng-template nglDatatableCell let-row="row">
+      <ngl-form-checkbox>
+        <input nglFormControl type="checkbox" [checked]="selectedClients.indexOf(row.id) >= 0" />
+      </ngl-form-checkbox>
+    </ng-template>
+  </ngl-datatable-column>
+  <ngl-datatable-column heading="Name" key="name" cellClass="slds-truncate"></ngl-datatable-column>
+  <ngl-datatable-column heading="CPF" key="cpf" cellClass="slds-truncate"></ngl-datatable-column>
+  <ngl-datatable-column heading="RG" key="rg" cellClass="slds-truncate"></ngl-datatable-column>
+  <!-- No rows overlay -->
+  <ng-template nglNoRowsOverlay>No clients registered</ng-template>
+</table>

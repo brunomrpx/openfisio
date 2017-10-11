@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './shared/shared.module';
+import { ClientModule } from './clients/client.module';
 
 @NgModule({
   imports: [
-    SharedModule
+    ClientModule
+  ],
+  exports: [
+    ClientModule
   ],
   declarations: [],
   providers: [],
