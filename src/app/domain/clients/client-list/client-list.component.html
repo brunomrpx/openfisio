@@ -1,4 +1,4 @@
-<table ngl-datatable [data]="clients" class="slds-max-medium-table--stacked-horizontal" (onRowClick)="toggleRowSelection($event)">
+<table ngl-datatable [data]="clients" [striped]="false" class="slds-max-medium-table--stacked-horizontal" (onRowClick)="toggleRowSelection($event)">
   <ngl-datatable-column>
     <ng-template nglDatatableHeading>
       <ngl-form-checkbox>

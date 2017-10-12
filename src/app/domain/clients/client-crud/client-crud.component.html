@@ -1,0 +1,17 @@
+<div class="slds-grid slds-m-around--small">
+  <div class="slds-col">
+    <h1 class="slds-text-heading--medium">Client Management</h1>
+  </div>
+  <div class="slds-col slds-text-align--right">
+    <button type="button" nglButton="brand">
+      <ngl-icon icon="new" align="left"></ngl-icon>New
+    </button>
+    <button type="button" nglButton="neutral" (click)="deleteClients()" [disabled]="clientListComponent?.selectedClients.length === 0">
+      <ngl-icon icon="delete" align="left"></ngl-icon>Delete
+    </button>
+    <button type="button" nglButton="neutral" [disabled]="clientListComponent?.selectedClients.length !== 1">
+      <ngl-icon icon="edit" align="left"></ngl-icon>Edit
+    </button>
+  </div>
+</div>
+<app-client-list #clientListComponent [clients]="clients"></app-client-list>

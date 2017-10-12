@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Client } from '../client.model';
-import { ClientService } from '../client.service';
 import { INglDatatableRowClick } from 'ng-lightning';
 
 @Component({
@@ -9,14 +8,9 @@ import { INglDatatableRowClick } from 'ng-lightning';
   templateUrl: 'client-list.component.html'
 })
 export class ClientListComponent {
-  public clients: Client[] = [];
-  public selectedClients = [];
+  @Input() clients: Client[] = [];
 
-  constructor(private clientService: ClientService) {
-    this.clientService.getClients().subscribe(clients => {
-      this.clients = clients;
-    });
-  }
+  public selectedClients = [];
 
   toggleRowSelection($event: INglDatatableRowClick) {
     $event.event.preventDefault();

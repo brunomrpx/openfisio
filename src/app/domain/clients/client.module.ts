@@ -5,6 +5,7 @@ import { NglModule } from 'ng-lightning';
 
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientService } from './client.service';
+import { ClientCrudComponent } from './client-crud/client-crud.component';
 
 @NgModule({
   imports: [
@@ -13,10 +14,12 @@ import { ClientService } from './client.service';
     NglModule
   ],
   declarations: [
-    ClientListComponent
+    ClientListComponent,
+    ClientCrudComponent
   ],
   exports: [
-    ClientListComponent
+    ClientListComponent,
+    ClientCrudComponent
   ],
   entryComponents: [],
   providers: [
