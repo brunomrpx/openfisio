@@ -29,8 +29,10 @@ export class ClientFormComponent {
   }
 
   private bindErrorMessages() {
-    for (const ctrlName in this.formGroup.controls) {
-      const control = this.formGroup.get(ctrlName);
+    const controls = this.formGroup.controls;
+
+    for (const ctrlName in controls) {
+      const control = controls[ctrlName];
 
       if (control.valid) {
         delete this.errorMessages[ctrlName];
