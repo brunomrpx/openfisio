@@ -1,5 +1,5 @@
 <table ngl-datatable [data]="clients" [striped]="false" class="slds-max-medium-table--stacked-horizontal" (onRowClick)="toggleRowSelection($event)">
-  <ngl-datatable-column>
+  <ngl-datatable-column headClass="selection-column">
     <ng-template nglDatatableHeading>
       <ngl-form-checkbox>
         <input nglFormControl type="checkbox" #selectAll (click)="toggleSelectAll(selectAll.checked)"/>
