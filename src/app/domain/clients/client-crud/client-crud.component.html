@@ -1,9 +1,18 @@
+<ngl-modal header="New client" [(open)]="modalFormOpened">
+  <div body>
+    <app-client-form #clientForm></app-client-form>
+  </div>
+  <ng-template ngl-modal-footer>
+    <button class="slds-button slds-button--neutral" (click)="toggleModalForm()">Cancel</button>
+    <button class="slds-button slds-button--brand" (click)="clientForm?.form.ngSubmit.emit()">Save</button>
+  </ng-template>
+</ngl-modal>
 <div class="slds-grid slds-m-around--small">
   <div class="slds-col">
     <h1 class="slds-text-heading--medium">Client Management</h1>
   </div>
   <div class="slds-col slds-text-align--right">
-    <button type="button" nglButton="brand">
+    <button type="button" nglButton="brand" (click)="toggleModalForm()">
       <ngl-icon icon="new" align="left"></ngl-icon>New
     </button>
     <button type="button" nglButton="neutral" (click)="deleteClients()" [disabled]="clientListComponent?.selectedClients.length === 0">

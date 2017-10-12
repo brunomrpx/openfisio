@@ -1,0 +1,11 @@
+<form [formGroup]="formGroup" #form="ngForm" (ngSubmit)="save()">
+  <ngl-form-element label="Nome" class="slds-m-top--small" [error]="errorMessages['name']">
+    <input nglFormControl type="text" formControlName="name">
+  </ngl-form-element>
+  <ngl-form-element label="CPF" class="slds-m-top--small" [error]="errorMessages['cpf']">
+    <input nglFormControl type="text" formControlName="cpf">
+  </ngl-form-element>
+  <ngl-form-element label="RG" class="slds-m-top--small" [error]="errorMessages['rg']">
+    <input nglFormControl type="text" formControlName="rg">
+  </ngl-form-element>
+</form>

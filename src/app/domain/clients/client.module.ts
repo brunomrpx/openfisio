@@ -1,25 +1,29 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NglModule } from 'ng-lightning';
 
 import { ClientListComponent } from './client-list/client-list.component';
 import { ClientService } from './client.service';
 import { ClientCrudComponent } from './client-crud/client-crud.component';
+import { ClientFormComponent } from './client-form/client-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    NglModule
+    NglModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ClientListComponent,
-    ClientCrudComponent
+    ClientCrudComponent,
+    ClientFormComponent
   ],
   exports: [
     ClientListComponent,
-    ClientCrudComponent
+    ClientCrudComponent,
+    ClientFormComponent
   ],
   entryComponents: [],
   providers: [

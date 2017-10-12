@@ -12,6 +12,7 @@ export class ClientCrudComponent implements OnInit {
   @ViewChild(ClientListComponent) clientListComponent: ClientListComponent;
 
   public clients: Client[] = [];
+  public modalFormOpened = false;
 
   constructor(private clientService: ClientService) {
     this.clientService.getClients().subscribe(clients => {
@@ -21,6 +22,10 @@ export class ClientCrudComponent implements OnInit {
 
   ngOnInit() {
     console.log('-> client list component: ', this.clientListComponent);
+  }
+
+  toggleModalForm() {
+    this.modalFormOpened = !this.modalFormOpened;
   }
 
   deleteClients() {
