@@ -1,6 +1,6 @@
 <ngl-modal [header]="headerTexts[clientForm.formState]" [(open)]="modalFormOpened">
   <div body>
-    <app-client-form #clientForm></app-client-form>
+    <app-client-form #clientForm (created)="closeModalForm()" (updated)="closeModalForm()"></app-client-form>
   </div>
   <ng-template ngl-modal-footer>
     <button class="slds-button slds-button--neutral" (click)="toggleModalForm()">Cancel</button>

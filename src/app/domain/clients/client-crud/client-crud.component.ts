@@ -19,7 +19,7 @@ export class ClientCrudComponent {
   public headerTexts = headerTexts;
 
   constructor(private clientService: ClientService) {
-    this.clientService.getClients().subscribe(clients => {
+    this.clientService.retrieve().subscribe(clients => {
       this.clients = clients;
     });
   }
@@ -54,7 +54,7 @@ export class ClientCrudComponent {
   deleteClients() {
     const selectedClients = this.clientListComponent.selectedClients;
 
-    this.clients = this.clients.filter(c => selectedClients.indexOf(c.id) < 0);
     this.clientListComponent.selectedClients = [];
+    this.clientService.delete(selectedClients);
   }
 }

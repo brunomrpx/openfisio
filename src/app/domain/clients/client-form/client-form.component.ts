@@ -1,8 +1,9 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { Client } from '../client.model';
 import { FormState } from '../client.constant';
+import { ClientService } from '../client.service';
 
 @Component({
   selector: 'app-client-form',
@@ -10,6 +11,8 @@ import { FormState } from '../client.constant';
 })
 export class ClientFormComponent {
   @ViewChild('form') form: NgForm;
+  @Output() created = new EventEmitter();
+  @Output() updated = new EventEmitter();
 
   public formGroup: FormGroup;
   public errorMessages: { [key: string]: string } = {};
@@ -30,7 +33,7 @@ export class ClientFormComponent {
     return this._client;
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private clientService: ClientService) {
     this.formGroup = this.formBuilder.group({
       name: [null, Validators.required],
       rg: [null, Validators.required],
@@ -94,6 +97,20 @@ export class ClientFormComponent {
     this.submitted = true;
     this.updateErrorMessages();
 
-    console.log('-> saving client: ', this.formGroup, this.client);
+    if (this.formGroup.invalid) {
+      return;
+    }
+
+    const formValue = this.formGroup.value;
+
+    if (this.formState === FormState.Create) {
+      this.clientService.create(formValue);
+      this.created.emit(formValue);
+    } else {
+      formValue.id = this.client.id;
+
+      this.clientService.update(formValue);
+      this.updated.emit(formValue);
+    }
   }
 }

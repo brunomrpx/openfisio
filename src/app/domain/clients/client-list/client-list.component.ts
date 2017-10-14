@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
+import { INglDatatableRowClick } from 'ng-lightning';
 
 import { Client } from '../client.model';
-import { INglDatatableRowClick } from 'ng-lightning';
 
 @Component({
   selector: 'app-client-list',
