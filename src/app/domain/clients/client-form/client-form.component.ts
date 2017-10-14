@@ -1,5 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+
+import { Client } from '../client.model';
+import { FormState } from '../client.constant';
 
 @Component({
   selector: 'app-client-form',
@@ -9,8 +12,23 @@ export class ClientFormComponent {
   @ViewChild('form') form: NgForm;
 
   public formGroup: FormGroup;
-  public errorMessages = {};
+  public errorMessages: { [key: string]: string } = {};
+  public formState = FormState.Create;
+
+  private _client: Client = null;
   private submitted = false;
+
+  @Input() set client(client: Client) {
+    this._client = client;
+
+    if (this.client !== null) {
+      this.bindClientValue();
+    }
+  }
+
+  get client() {
+    return this._client;
+  }
 
   constructor(private formBuilder: FormBuilder) {
     this.formGroup = this.formBuilder.group({
@@ -20,15 +38,27 @@ export class ClientFormComponent {
     });
 
     this.formGroup.valueChanges.subscribe(changes => {
-      console.log('-> changes: ', changes);
-
       if (this.submitted) {
-        this.bindErrorMessages();
+        this.updateErrorMessages();
       }
     });
   }
 
-  private bindErrorMessages() {
+  private bindClientValue() {
+    this.formState = FormState.Update;
+
+    const controls = this.formGroup.controls;
+
+    for (const ctrlName in controls) {
+      const control = controls[ctrlName];
+
+      if (this.client[ctrlName]) {
+        control.setValue(this.client[ctrlName]);
+      }
+    }
+  }
+
+  private updateErrorMessages() {
     const controls = this.formGroup.controls;
 
     for (const ctrlName in controls) {
@@ -52,10 +82,18 @@ export class ClientFormComponent {
     return message;
   }
 
+  reset() {
+    this.formGroup.reset();
+    this.errorMessages = {};
+    this.submitted = false;
+    this.client = null;
+    this.formState = FormState.Create;
+  }
+
   save() {
     this.submitted = true;
-    this.bindErrorMessages();
+    this.updateErrorMessages();
 
-    console.log('-> saving client: ', this.formGroup);
+    console.log('-> saving client: ', this.formGroup, this.client);
   }
 }

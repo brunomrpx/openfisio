@@ -1,4 +1,4 @@
-<ngl-modal header="New client" [(open)]="modalFormOpened">
+<ngl-modal [header]="headerTexts[clientForm.formState]" [(open)]="modalFormOpened">
   <div body>
     <app-client-form #clientForm></app-client-form>
   </div>
@@ -18,7 +18,7 @@
     <button type="button" nglButton="neutral" (click)="deleteClients()" [disabled]="clientListComponent?.selectedClients.length === 0">
       <ngl-icon icon="delete" align="left"></ngl-icon>Delete
     </button>
-    <button type="button" nglButton="neutral" [disabled]="clientListComponent?.selectedClients.length !== 1">
+    <button type="button" nglButton="neutral" (click)="editClient()" [disabled]="clientListComponent?.selectedClients.length !== 1">
       <ngl-icon icon="edit" align="left"></ngl-icon>Edit
     </button>
   </div>

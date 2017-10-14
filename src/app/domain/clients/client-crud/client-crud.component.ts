@@ -1,18 +1,22 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { Client } from '../client.model';
 import { ClientService } from '../client.service';
+import { headerTexts } from '../client.constant';
 import { ClientListComponent } from '../client-list/client-list.component';
+import { ClientFormComponent } from '../client-form/client-form.component';
 
 @Component({
   selector: 'app-client-crud',
   templateUrl: 'client-crud.component.html'
 })
-export class ClientCrudComponent implements OnInit {
+export class ClientCrudComponent {
   @ViewChild(ClientListComponent) clientListComponent: ClientListComponent;
+  @ViewChild(ClientFormComponent) clientFormComponent: ClientFormComponent;
 
   public clients: Client[] = [];
   public modalFormOpened = false;
+  public headerTexts = headerTexts;
 
   constructor(private clientService: ClientService) {
     this.clientService.getClients().subscribe(clients => {
@@ -20,12 +24,31 @@ export class ClientCrudComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    console.log('-> client list component: ', this.clientListComponent);
+  toggleModalForm() {
+    if (this.modalFormOpened) {
+      this.closeModalForm();
+    } else {
+      this.clientFormComponent.reset();
+      this.openModalForm();
+    }
   }
 
-  toggleModalForm() {
-    this.modalFormOpened = !this.modalFormOpened;
+  openModalForm() {
+    this.modalFormOpened = true;
+  }
+
+  closeModalForm() {
+    this.modalFormOpened = false;
+  }
+
+  editClient() {
+    this.clientFormComponent.reset();
+
+    const selectedId = this.clientListComponent.selectedClients[0];
+    const selectedClient = this.clients.find(c => c.id === selectedId);
+
+    this.clientFormComponent.client = selectedClient;
+    this.openModalForm();
   }
 
   deleteClients() {
